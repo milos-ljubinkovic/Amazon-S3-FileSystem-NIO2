@@ -291,7 +291,7 @@ public class S3FileSystemProvider extends FileSystemProvider {
         /**
          * TODO: set as a list. one s3FileSystem by region
          */
-        return fileSystem.getPath(uri.getPath());
+        return fileSystem.getPath(uri.getHost() + uri.getPath());
     }
 
     @Override
