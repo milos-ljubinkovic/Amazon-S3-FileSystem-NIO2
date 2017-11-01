@@ -286,13 +286,13 @@ public class S3FileSystemProvider extends FileSystemProvider {
      * s3://access-key:secret-key@endpoint.com/
      */
     @Override
-    public Path getPath(URI uri) {
-        FileSystem fileSystem = getFileSystem(uri);
-        /**
-         * TODO: set as a list. one s3FileSystem by region
-         */
-        return fileSystem.getPath(uri.getHost() + uri.getPath());
-    }
+  public Path getPath(URI uri) {
+    FileSystem fileSystem = getFileSystem(uri);
+    /**
+     * TODO: set as a list. one s3FileSystem by region
+     */
+    return fileSystem.getPath("/" + uri.getHost() + uri.getPath());
+  }
 
     @Override
     public DirectoryStream<Path> newDirectoryStream(Path dir, DirectoryStream.Filter<? super Path> filter) throws IOException {
