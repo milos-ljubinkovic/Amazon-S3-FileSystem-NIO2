@@ -267,7 +267,7 @@ public class S3FileSystemProvider extends FileSystemProvider {
             return fileSystems.get(key);
         } else {
           if (!fileSystems.isEmpty()) {
-            return fileSystems.get(0);
+            return fileSystems.values().iterator().next();
           }
           throw new FileSystemNotFoundException("S3 filesystem not yet created. Use newFileSystem() instead");
         }
