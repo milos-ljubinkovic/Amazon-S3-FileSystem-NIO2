@@ -334,6 +334,8 @@ public class S3Path implements Path {
 
         StringBuilder builder = new StringBuilder();
         builder.append("s3://");
+        builder.append(fileStore.name());
+        builder.append(PATH_SEPARATOR);
         builder.append(Joiner.on(PATH_SEPARATOR).join(parts));
         return URI.create(builder.toString());
     }
