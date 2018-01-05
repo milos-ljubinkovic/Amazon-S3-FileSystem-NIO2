@@ -14,23 +14,19 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URI;
 import java.nio.file.*;
-import java.util.Properties;
 
 import static com.upplication.s3fs.AmazonS3Factory.ACCESS_KEY;
 import static com.upplication.s3fs.AmazonS3Factory.SECRET_KEY;
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
 
 public class NewOutputStreamTest extends S3UnitTestBase {
 
     private S3FileSystemProvider s3fsProvider;
 
     @Before
-    public void setup() {
-        s3fsProvider = spy(new S3FileSystemProvider());
-        doReturn(false).when(s3fsProvider).overloadPropertiesWithSystemEnv(any(Properties.class), anyString());
-        doReturn(new Properties()).when(s3fsProvider).loadAmazonProperties();
+    public void setup() throws IOException {
+        s3fsProvider = getS3fsProvider();
+        s3fsProvider.newFileSystem(S3EndpointConstant.S3_GLOBAL_URI_TEST, null);
     }
 
     @Test
@@ -136,7 +132,7 @@ public class NewOutputStreamTest extends S3UnitTestBase {
         // fixtures
         AmazonS3ClientMock client = AmazonS3MockFactory.getAmazonClientMock();
         client.bucket("bucketA").dir("dir");
-        return s3fsProvider.newFileSystem(URI.create("s3://endpoint1/"), ImmutableMap.<String, Object>builder().put(ACCESS_KEY, "access key").put(SECRET_KEY, "secret key").build()).getPath("/bucketA/dir");
+        return s3fsProvider.newFileSystem(URI.create("s3://endpoint1/"), ImmutableMap.<String, Object>builder().put(ACCESS_KEY, "access_key").put(SECRET_KEY, "secret_key").build()).getPath("/bucketA/dir");
     }
 
     /**
