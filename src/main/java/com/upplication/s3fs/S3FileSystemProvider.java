@@ -155,9 +155,7 @@ public class S3FileSystemProvider extends FileSystemProvider {
             }
             return authority + "@" + host;
         } else {
-            String accessKey = (String) props.get(ACCESS_KEY);
-            return (accessKey != null ? accessKey + "@" : "") +
-                    (uri.getHost() != null ? uri.getHost() : Constants.S3_HOSTNAME);
+            return (uri.getHost() != null ? uri.getHost() : Constants.S3_HOSTNAME);
         }
     }
 
